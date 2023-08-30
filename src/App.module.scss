@@ -8,3 +8,44 @@
   flex-direction: column;
   text-align: center;
 }
+
+.input {
+  margin-bottom: 16px;
+  position: relative;
+  width: 20em;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  outline: none;
+
+  border: 0.05em solid #777777;
+
+  &:focus {
+    border-color: hsl(200, 100%, 50%);
+  }
+}
+
+.button {
+  margin-top: 16px;
+  position: relative;
+  width: 20em;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  outline: none;
+
+  border: 0.05em solid #777777;
+
+  &:focus {
+    border-color: hsl(200, 100%, 50%);
+  }
+  &:hover {
+    border-color: hsl(200, 100%, 50%);
+  }
+}
