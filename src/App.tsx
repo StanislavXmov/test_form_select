@@ -9,7 +9,7 @@ type Option = {
   value: string | number;
 }
 
-const options = [
+const defaultOptions = [
   { label: "Physiological needs", value: 1 },
   { label: "Safety needs", value: 2 },
   { label: "Love and social needs", value: 3 },
@@ -23,6 +23,7 @@ const options = [
 interface FormProps {
   nickname: string;
   option: Option | undefined;
+  options: Option[];
 }
 
 function App() {
@@ -35,12 +36,13 @@ function App() {
   } = useForm<FormProps>({
     defaultValues: {
       nickname: '',
-      option: options[0],
+      option: defaultOptions[0],
+      options: [defaultOptions[7]],
     },
     mode: 'onChange',
   });
 
-  const { option } = watch();
+  const { option, options } = watch();
   
   useEffect(() => {
     register('option');
@@ -54,6 +56,10 @@ function App() {
     setValue('option', value);
   };
 
+  const handleMultipleOptionChange = (value: Option[]) => {
+    setValue('options', value);
+  };
+
   return (
     <div className={styles.app}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,9 +70,15 @@ function App() {
           {...register('nickname', {required: true, minLength: 3})} 
         />
         <Select 
-          options={options} 
+          options={defaultOptions} 
           value={option}
-          onChange={(option) => handleOptionChange(option)}
+          onChange={option => handleOptionChange(option)}
+        />
+        <Select 
+          multiple
+          options={defaultOptions}
+          value={options}
+          onChange={options => handleMultipleOptionChange(options)}
         />
         <button className={styles.button} type='submit'>Submit</button>
       </form>
